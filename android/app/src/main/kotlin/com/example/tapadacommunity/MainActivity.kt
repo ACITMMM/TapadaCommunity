@@ -1,4 +1,4 @@
-package com.example.tapadacommunity
+package org.acitmmm.tapadacommunity
 
 import io.flutter.embedding.android.FlutterActivity
 
