@@ -14,7 +14,7 @@ TapadaCommunity is an open-source mobile application developed by [ACITMMM](http
 
 ## Contributing
 
-We welcome contributions from the community! If you'd like to contribute to TapadaCommunity please clone the respository and open issues merge requests.
+We welcome contributions from the community! If you'd like to contribute to TapadaCommunity please clone the respository and open issues and merge requests.
 
 ## License
 
@@ -58,7 +58,7 @@ if you have more than one device connected you might choose one:
    Connected devices:
    SM A405FN (mobile) • R18D35BH69H                              • android-arm64  • Android 11 (API 30)
    2201116PG (mobile) • de83fac63626                             • android-arm64  • Android 13 (API 33)
-   iPhone b0 (mobile) • a11d42cd5a2a3080927a0f3daac4fd8d18c3ccf6 • ios            • iOS 15.7.8 19H364
+   iPhone B0 (mobile) • a11d42cd5a2a3080927a0f3daac4fd8d18c3ccf6 • ios            • iOS 15.7.8 19H364
    Chrome (web)       • chrome                                   • web-javascript • Google Chrome 116.0.5845.96
    
    No wireless devices were found.
