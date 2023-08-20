@@ -26,4 +26,4 @@ These instructions will guide you through setting up the development environment
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/TapadaCommunity.git
+   git clone https://github.com/ACITMMM/TapadaCommunity.git
