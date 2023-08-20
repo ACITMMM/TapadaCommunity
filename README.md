@@ -2,8 +2,10 @@
 
 TapadaCommunity is an open-source mobile application developed by [ACITMMM](https://acitmmm.webnode.pt) (Associação a comunidade Islâmica Mercês e Mem martins) to assist expatriates in finding essential social services within the Tapada Das Mercês neighborhood. The application is built using Flutter and is designed for both iOS and Android platforms.
 
-<img src="/screenshots/screenshot.png" alt="App Screenshots" width="400" height="800">
-<img src="/screenshots/screenshot1.jpeg" alt="App Screenshots" width="400" height="800">
+<div style="display: flex;">
+   <img src="/screenshots/screenshot.png" alt="App Screenshots" width="400" height="800">
+   <img src="/screenshots/screenshot1.jpeg" alt="App Screenshots" width="400" height="800">
+</div>
 
 ## Features
 
