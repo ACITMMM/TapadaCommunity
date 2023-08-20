@@ -57,24 +57,25 @@ These instructions will guide you through setting up the development environment
    ```bash
    flutter run
 
-if you have more than one device connected you might choose one:
-
-   ```bash
-   Connected devices:
-   SM A405FN (mobile) • R18D35BH69H                              • android-arm64  • Android 11 (API 30)
-   2201116PG (mobile) • de83fac63626                             • android-arm64  • Android 13 (API 33)
-   iPhone B0 (mobile) • a11d42cd5a2a3080927a0f3daac4fd8d18c3ccf6 • ios            • iOS 15.7.8 19H364
-   Chrome (web)       • chrome                                   • web-javascript • Google Chrome 116.0.5845.96
-   
-   No wireless devices were found.
-   
-   [1]: SM A405FN (R58N35B76CH)
-   [2]: 2201116PG (defac8366236)
-   [3]: iPhone b0 (a11d0927a0f42cd5a2a3083daac4fd8d18c3ccf6)
-   [4]: Chrome (chrome)
+      if you have more than one device connected you might choose one:
+      
+         ```bash
+         Connected devices:
+         SM A405FN (mobile) • R18D35BH69H                              • android-arm64  • Android 11 (API 30)
+         2201116PG (mobile) • de83fac63626                             • android-arm64  • Android 13 (API 33)
+         iPhone B0 (mobile) • a11d42cd5a2a3080927a0f3daac4fd8d18c3ccf6 • ios            • iOS 15.7.8 19H364
+         Chrome (web)       • chrome                                   • web-javascript • Google Chrome 116.0.5845.96
+         
+         No wireless devices were found.
+         
+         [1]: SM A405FN (R58N35B76CH)
+         [2]: 2201116PG (defac8366236)
+         [3]: iPhone b0 (a11d0927a0f42cd5a2a3083daac4fd8d18c3ccf6)
+         [4]: Chrome (chrome)
 
 5. After choose anh device flutter will compile the code for the platform and a menu like that might appear:
 
+   ```bash
    Launching lib/main.dart on SM A405FN in debug mode...
    Running Gradle task 'assembleDebug'...                                146.9s
    ✓  Built build/app/outputs/flutter-apk/app-debug.apk.
