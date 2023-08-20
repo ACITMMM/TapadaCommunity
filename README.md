@@ -12,6 +12,18 @@ TapadaCommunity is an open-source mobile application developed by [ACITMMM](http
 - Mark favorite services for quick access.
 - User-friendly interface and smooth navigation.
 
+## Contributing
+
+We welcome contributions from the community! If you'd like to contribute to TapadaCommunity please clone the respository and open issues merge requests.
+
+## License
+
+This project is licensed under the MIT License.
+
+## Contact
+
+For inquiries about the project or organization, you can reach out to ACITMMM at contact@acitmmm.org.
+
 ## Getting Started
 
 These instructions will guide you through setting up the development environment and running the app on your local machine.
@@ -26,7 +38,7 @@ These instructions will guide you through setting up the development environment
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/ACITMMM/TapadaCommunity.git
+   git clone https://github.com/ACITMMM/TapadaCommunity.git```
 
 2. Change into the project directory:
    ```bash
@@ -54,33 +66,21 @@ if you have more than one device connected you might choose one:
    [1]: SM A405FN (R58N35B76CH)
    [2]: 2201116PG (defac8366236)
    [3]: iPhone b0 (a11d0927a0f42cd5a2a3083daac4fd8d18c3ccf6)
-   [4]: Chrome (chrome)
+   [4]: Chrome (chrome)```
 
-After choose anh device flutter will compile the code for the platform and a menu like that might appear:
+5. After choose anh device flutter will compile the code for the platform and a menu like that might appear:
 
-   ```bash
-      Launching lib/main.dart on SM A405FN in debug mode...
-      Running Gradle task 'assembleDebug'...                                146.9s
-      ✓  Built build/app/outputs/flutter-apk/app-debug.apk.
-      Installing build/app/outputs/flutter-apk/app-debug.apk...          18.4s
-      Syncing files to device SM A405FN...                                4.2s
-      
-      Flutter run key commands.
-      r Hot reload. 🔥🔥🔥
-      R Hot restart.
-      h List all available interactive commands.
-      d Detach (terminate "flutter run" but leave application running).
-      c Clear the screen
-      q Quit (terminate the application on the device).
+   Launching lib/main.dart on SM A405FN in debug mode...
+   Running Gradle task 'assembleDebug'...                                146.9s
+   ✓  Built build/app/outputs/flutter-apk/app-debug.apk.
+   Installing build/app/outputs/flutter-apk/app-debug.apk...          18.4s
+   Syncing files to device SM A405FN...                                4.2s
+   
+   Flutter run key commands.
+   r Hot reload. 🔥🔥🔥
+   R Hot restart.
+   h List all available interactive commands.
+   d Detach (terminate "flutter run" but leave application running).
+   c Clear the screen
+   q Quit (terminate the application on the device).
 
-### Contributing
-
-We welcome contributions from the community! If you'd like to contribute to TapadaCommunity please clone the respository and open issues merge requests.
-
-### License
-
-This project is licensed under the MIT License.
-
-### Contact
-
-For inquiries about the project or organization, you can reach out to ACITMMM at contact@acitmmm.org.
