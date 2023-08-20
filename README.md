@@ -60,7 +60,6 @@ These instructions will guide you through setting up the development environment
 
       if you have more than one device connected you might choose one:
       
-         ```bash
          Connected devices:
          SM A405FN (mobile) • R18D35BH69H                              • android-arm64  • Android 11 (API 30)
          2201116PG (mobile) • de83fac63626                             • android-arm64  • Android 13 (API 33)
