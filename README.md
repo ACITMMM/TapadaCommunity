@@ -4,8 +4,8 @@ TapadaCommunity is an open-source mobile application developed by [ACITMMM](http
 
  
 <div style="display: flex;">
-   <img src="/screenshots/screenshot.png" alt="App Screenshots" width="448" height="852">
-   <img src="/screenshots/screenshot1.jpeg" alt="App Screenshots" width="540" height="1170">
+   <img src="/screenshots/screenshot.png" alt="App Screenshots" width="448" height="852" style="flex: 1; margin-right: 10px;" >
+   <img src="/screenshots/screenshot1.jpeg" alt="App Screenshots" width="540" height="1170" style="flex: 1; margin-right: 10px;">
 </div>
 
 ## Features
