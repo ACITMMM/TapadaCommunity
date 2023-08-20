@@ -38,7 +38,7 @@ These instructions will guide you through setting up the development environment
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/ACITMMM/TapadaCommunity.git```
+   git clone https://github.com/ACITMMM/TapadaCommunity.git
 
 2. Change into the project directory:
    ```bash
