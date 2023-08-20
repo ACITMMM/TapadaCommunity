@@ -66,7 +66,7 @@ if you have more than one device connected you might choose one:
    [1]: SM A405FN (R58N35B76CH)
    [2]: 2201116PG (defac8366236)
    [3]: iPhone b0 (a11d0927a0f42cd5a2a3083daac4fd8d18c3ccf6)
-   [4]: Chrome (chrome)```
+   [4]: Chrome (chrome)
 
 5. After choose anh device flutter will compile the code for the platform and a menu like that might appear:
 
