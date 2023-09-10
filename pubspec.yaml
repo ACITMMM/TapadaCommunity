@@ -39,6 +39,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^2.15.1
   intl_translation: ^0.18.2
+  firebase_auth: ^4.9.0
+  shared_preferences: ^2.2.1
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +70,7 @@ flutter:
    - assets/home.png
    - assets/equipa.png
    - assets/login_background.png
+   - assets/welcome.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

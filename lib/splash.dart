@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'equipa.dart';
+import 'welcome.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -16,11 +18,27 @@ class _SplashScreenState extends State<SplashScreen> {
     // Delay the splash screen for 3 seconds.
     Future.delayed(const Duration(seconds: 3), () {
       // Navigate to the home screen after the splash screen.
+      _checkEmailCache();
+    });
+  }
+
+  void _checkEmailCache() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? cachedEmail = prefs.getString('cachedEmail');
+    if (cachedEmail != null) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => WelcomePage(),
+        ),
+      );
+    } else {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => EquipaPage()),
+        MaterialPageRoute(
+          builder: (context) => EquipaPage(),
+        ),
       );
-    });
+    }
   }
 
   @override

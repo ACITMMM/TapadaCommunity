@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'welcome.dart';
+
 
 class RegisterPage extends StatelessWidget {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _lastnameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController = TextEditingController();
@@ -10,6 +16,45 @@ class RegisterPage extends StatelessWidget {
     String emailPattern = r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$';
     RegExp regex = RegExp(emailPattern);
     return regex.hasMatch(value);
+  }
+
+  void _registerWithFirebase(BuildContext context) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+
+      // User registered successfully
+      User? user = userCredential.user;
+      print('User registered with UID: ${user?.uid}');
+
+      // Store email in cache
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('cachedEmail', _emailController.text);
+
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'email-already-in-use') {
+        _showError(context, 'The email address is already in use by another account.');
+      } else if (e.code == 'invalid-email') {
+        _showError(context, 'Invalid email address.');
+      } else if (e.code == 'weak-password') {
+        _showError(context, 'The password provided is too weak.');
+      } else {
+        _showError(context, 'Error registering user: $e');
+      }
+    } catch (e) {
+      _showError(context, 'Unexpected error: $e');
+    }
+  }
+
+  void _showError(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: Duration(seconds: 5),
+      ),
+    );
   }
 
   @override
@@ -25,6 +70,38 @@ class RegisterPage extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    Container(
+                      height: 50, // Set a fixed height for the input fields
+                      child: TextField(
+                        controller: _nameController,
+                        keyboardType: TextInputType.name,
+                        decoration: InputDecoration(
+                          hintText: 'First Name',
+                          fillColor: Colors.white,
+                          filled: true,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Container(
+                      height: 50, // Set a fixed height for the input fields
+                      child: TextField(
+                        controller: _lastnameController,
+                        keyboardType: TextInputType.name,
+                        decoration: InputDecoration(
+                          hintText: 'Last Name',
+                          fillColor: Colors.white,
+                          filled: true,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 10),
                     Container(
                       height: 50, // Set a fixed height for the input fields
                       child: TextField(
@@ -81,10 +158,13 @@ class RegisterPage extends StatelessWidget {
                           if (_validateEmail(_emailController.text) &&
                               _passwordController.text.isNotEmpty &&
                               _passwordController.text == _confirmPasswordController.text) {
-                            // Registration logic here
-                            // Navigate to the next page or perform necessary actions
+                              _registerWithFirebase(context);
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => WelcomePage()),
+                              );
                           } else {
-                            // Show an error message or perform other actions for invalid input
+                            _showError(context, 'Invalid input. Please check your email and password.');
                           }
                         },
                         child: Text('Register'),

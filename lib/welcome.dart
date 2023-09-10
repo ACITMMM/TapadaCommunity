@@ -1,17 +1,17 @@
+
+
 import 'package:flutter/material.dart';
-import 'package:dots_indicator/dots_indicator.dart';
 import 'intro.dart';
 import 'intro_second.dart';
 
-class EquipaPage extends StatefulWidget {
-  const EquipaPage({Key? key}) : super(key: key);
+class WelcomePage extends StatefulWidget {
+  const WelcomePage({Key? key}) : super(key: key);
 
   @override
-  State<EquipaPage> createState() => _EquipaPageState();
+  State<WelcomePage> createState() => _WelcomePageState();
 }
 
-class _EquipaPageState extends State<EquipaPage> {
-  int currentIndex = 0;
+class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class _EquipaPageState extends State<EquipaPage> {
                         children: [
                           Container(
                             child: Image.asset(
-                              'assets/equipa.png', // Use the transparent logo image
+                              'assets/welcome.png', // Use the transparent logo image
                               width: 350, // Adjust width as needed
                               height: 350, // Adjust height as needed
                               fit: BoxFit.contain, // Adjust the fit as needed
@@ -40,7 +40,7 @@ class _EquipaPageState extends State<EquipaPage> {
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 16), // Add padding of 16 units on left and right
                             child: Text(
-                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                              'Bem vindo',
                               style: TextStyle(
                                 fontSize: 16, // Adjust the font size as needed
                                 color: Colors.white,
@@ -68,31 +68,7 @@ class _EquipaPageState extends State<EquipaPage> {
                   ),
                 ],
               ),
-              const IntroPage(), // Display the second page
-              const IntroSecondPage(),
             ],
-            onPageChanged: (int index) {
-              setState(() {
-                currentIndex = index;
-              });
-            },
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: DotsIndicator(
-                dotsCount: 3,
-                position: currentIndex,
-                decorator: DotsDecorator(
-                  size: const Size.square(9.0),
-                  activeSize: const Size(18.0, 9.0),
-                  activeShape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
-                ),
-              ),
-            ),
           ),
         ],
       ),
