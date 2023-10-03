@@ -45,21 +45,57 @@ These instructions will guide you through setting up the development environment
 
    ```bash
    git clone https://github.com/ACITMMM/TapadaCommunity.git
+   ```
 
 2. Change into the project directory:
    ```bash
    cd TapadaCommunity
+   ```
    
 3. Install dependencies:
    ```bash
    flutter pub get
+   ```
    
-4. Run the app:
+4. List the SHA-1 and SHA-256 fingerprints for your `debug.keystore`, which usually lies on an `.android` folder inside your home folder.
+
+   4a. For Linux and Mac:
+
+   ```bash
+   keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android
+   ```
+
+   4b. For Windows:
+
+   ```bash
+   keytool -list -v -keystore C:\Users\<your-username>\.android\debug.keystore -alias androiddebugkey -storepass android -keypass android
+   ```
+   
+   The output should contain the following snippet (with different fingerprint values):
+
+   ```
+   ...
+   Certificate fingerprints:
+      SHA1: 37:E8:22:2F:B0:E6:7C:F5:D3:EB:FB:B1:DE:1F:17:E4:1C:E5:03:65
+      SHA256: 67:C8:79:A6:50:C8:F9:3E:5E:C7:12:00:D3:6A:E4:B1:50:0D:63:64:84:EB:6D:A1:F6:1C:97:E6:30:AE:F0:97
+   ...
+   ```
+
+
+5. Add SHA certificate fingerprints to the [Android App on Firebase project](https://console.firebase.google.com/u/0/project/tapadacommunity/settings/general/android:org.acitmmm.tapadacommunity).
+   
+   **IMPORTANT**: Add both SHA-1 and SHA-256.
+      
+
+6. Run the app:
+
    ```bash
    flutter run
+   ```
 
    4a. if you have more than one device connected you might choose one:
    
+      ```
       Connected devices:
       SM A405FN (mobile) • R18D35BH69H                              • android-arm64  • Android 11 (API 30)
       2201116PG (mobile) • de83fac63626                             • android-arm64  • Android 13 (API 33)
@@ -72,8 +108,9 @@ These instructions will guide you through setting up the development environment
       [2]: 2201116PG (defac8366236)
       [3]: iPhone b0 (a11d0927a0f42cd5a2a3083daac4fd8d18c3ccf6)
       [4]: Chrome (chrome)
+      ```
 
-5. After choose anh device flutter will compile the code for the platform and a menu like that might appear:
+7. After choose anh device flutter will compile the code for the platform and a menu like that might appear:
 
    ```bash
    Launching lib/main.dart on SM A405FN in debug mode...
@@ -89,4 +126,5 @@ These instructions will guide you through setting up the development environment
    d Detach (terminate "flutter run" but leave application running).
    c Clear the screen
    q Quit (terminate the application on the device).
+   ```
 

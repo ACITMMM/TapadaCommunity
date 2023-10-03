@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
+import 'package:tapadacommunity/auth.dart';
+import 'package:tapadacommunity/welcome.dart';
 import 'register.dart';
 import 'forgot_password.dart';
+
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -30,6 +33,32 @@ class MyHomePage extends StatelessWidget {
       body: _buildContainer(context)
     );
   }
+
+  void _registerWithGoogle(BuildContext context) async {
+    try {
+
+      await signInWithGoogle();
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => WelcomePage()),
+      );
+
+    } catch (e) {
+      _showError(context, 'Unexpected error: $e');
+    }
+  }
+
+  void _showError(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: Duration(seconds: 5),
+      ),
+    );
+  }
+
+
 
 Widget _buildContainer(BuildContext context) {
   return Container(
@@ -117,7 +146,9 @@ Widget _buildContainer(BuildContext context) {
                         SocialLoginButton(
                           borderRadius: 20,
                           buttonType: SocialLoginButtonType.google,
-                          onPressed: () {},
+                          onPressed: () {
+                            _registerWithGoogle(context);
+                          },
                         ),
                         const SizedBox(height: 10),
                         SocialLoginButton(
