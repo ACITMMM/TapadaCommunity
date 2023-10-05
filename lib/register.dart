@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tapadacommunity/auth.dart';
 import 'welcome.dart';
 
 
@@ -18,20 +19,18 @@ class RegisterPage extends StatelessWidget {
     return regex.hasMatch(value);
   }
 
-  void _registerWithFirebase(BuildContext context) async {
+  void _registerWithEmailAndPassword(BuildContext context) async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+
+      await signInWithEmailAndPassword(
         email: _emailController.text,
         password: _passwordController.text,
       );
 
-      // User registered successfully
-      User? user = userCredential.user;
-      print('User registered with UID: ${user?.uid}');
-
-      // Store email in cache
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('cachedEmail', _emailController.text);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => WelcomePage()),
+      );
 
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
@@ -158,11 +157,7 @@ class RegisterPage extends StatelessWidget {
                           if (_validateEmail(_emailController.text) &&
                               _passwordController.text.isNotEmpty &&
                               _passwordController.text == _confirmPasswordController.text) {
-                              _registerWithFirebase(context);
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(builder: (context) => WelcomePage()),
-                              );
+                              _registerWithEmailAndPassword(context);
                           } else {
                             _showError(context, 'Invalid input. Please check your email and password.');
                           }
