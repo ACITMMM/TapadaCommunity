@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'equipa.dart';
-import 'welcome.dart';
+import 'services_home.dart';
+
+import 'dart:convert';
+import 'dart:typed_data'; 
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -22,13 +25,36 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
+  final cacheManager = CacheManager(
+    Config(
+      'register',
+      stalePeriod: Duration(days: 90),
+    ),
+  );
+
+  Future<Map<String, String>?> getUserData() async {
+    try {
+      final fileInfo = await cacheManager.getFileFromCache('user_data.json');
+      if ( fileInfo != null) {
+        const JsonDecoder decoder = JsonDecoder();
+        final decodedData = jsonDecode(fileInfo.file.readAsStringSync());
+        return Map<String, String>.from(decodedData);
+      }
+      else {
+        return null;
+      }
+    } catch (e) {
+      print('Error: $e');
+      return null;
+    }
+  }
+
   void _checkEmailCache() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? cachedEmail = prefs.getString('cachedEmail');
-    if (cachedEmail != null) {
+    final userData = await getUserData();
+    if (userData != null) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => WelcomePage(),
+          builder: (context) => ServicesPage(),
         ),
       );
     } else {

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'intro.dart';
 import 'intro_second.dart';
+import 'services_home.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -40,7 +41,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 16), // Add padding of 16 units on left and right
                             child: Text(
-                              'Bem vindo',
+                              'Welcome X',
                               style: TextStyle(
                                 fontSize: 16, // Adjust the font size as needed
                                 color: Colors.white,
@@ -48,7 +49,16 @@ class _WelcomePageState extends State<WelcomePage> {
                               ),
                               textAlign: TextAlign.center, // Center the text
                             ),
-                          )                        
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => ServicesPage()),
+                              );
+                            },
+                            icon: Icon(Icons.arrow_forward, color: Colors.white),
+                          ),
                         ],
                       ),
                     ),

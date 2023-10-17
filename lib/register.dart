@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:tapadacommunity/auth.dart';
 import 'welcome.dart';
+
+import 'dart:convert';
+import 'dart:typed_data'; 
 
 
 class RegisterPage extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _lastnameController = TextEditingController();
+  final TextEditingController _sex = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController = TextEditingController();
+
+  final List<String> staticSexValues = ['Male', 'Female', 'Prefer not to inform'];
+
+  final cacheManager = CacheManager(
+    Config(
+      'register',
+      stalePeriod: Duration(days: 90),
+    ),
+  );
 
   bool _validateEmail(String value) {
     // Basic email validation
@@ -25,6 +38,17 @@ class RegisterPage extends StatelessWidget {
       await signInWithEmailAndPassword(
         email: _emailController.text,
         password: _passwordController.text,
+      );
+
+      final json = {'name': _nameController.text, 'lastname': _lastnameController.text, 'sex': _sex.text, 'email': _emailController.text};
+
+      final encoder = JsonUtf8Encoder();
+      final encodedString = encoder.convert(json);
+      final uint8List = Uint8List.fromList(encodedString);
+
+      await cacheManager.putFile(
+        'user_data.json',
+        uint8List,
       );
 
       Navigator.pushReplacement(
@@ -99,6 +123,27 @@ class RegisterPage extends StatelessWidget {
                           ),
                         ),
                       ),
+                    ),
+                    SizedBox(height: 10),
+                    DropdownButtonFormField(
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder( 
+                          borderSide: BorderSide(color: Colors.black, width: 1),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white,
+                      ),                      
+                      value: "Male",
+                      items: staticSexValues.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        _sex.text = newValue ?? '';
+                      },
                     ),
                     SizedBox(height: 10),
                     Container(
