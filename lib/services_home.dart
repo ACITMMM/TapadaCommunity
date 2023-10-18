@@ -45,9 +45,13 @@ class _ServicesPageState extends State<ServicesPage> {
               ],
             ),
           ),
-          Image.asset('assets/avatar.jpeg', height: 80, width: 80), // Adjust height and width as needed
-          Text('Name', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),                    
-          Row(
+          Image.asset('assets/avatar.jpeg', height: 40, width: 40), // Adjust height and width as needed
+          Text('Name', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)), 
+                          const SizedBox(height: 10),
+
+          Expanded(
+          child: SingleChildScrollView(
+            child: Row(
                 children: [
                     Expanded(
                     child: Column(
@@ -246,9 +250,12 @@ class _ServicesPageState extends State<ServicesPage> {
                     ),
                     ),
                 ],
-            )
-        ],
-      ),
+            ),
+          )
+        ),
+               ],
+      )
+ 
     );
   }
 }

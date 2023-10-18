@@ -170,18 +170,21 @@ class MyHomePage extends StatelessWidget {
                             ),                      
                           ),
                           const SizedBox(height: 10),
-                          TextField(
-                            controller: _passwordController,
-                            decoration: InputDecoration(
-                              hintText: '    Password',
-                              filled: true, // Set the field to be filled
-                              fillColor: Colors.white, // Set the fill color to white                        
-                              border: OutlineInputBorder( // Add border to the text input
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),    
-                              contentPadding: EdgeInsets.symmetric(vertical: 12), // Adjust the vertical padding
-                            ),                      
-                          ),
+                          Container(
+                            height: 50, // Set a fixed height for the input fields
+                            child: TextField(
+                              controller: _passwordController,
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                hintText: 'Password',
+                                fillColor: Colors.white,
+                                filled: true,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                            ),
+                          ),                          
                           const SizedBox(height: 10),
                           Container(
                             height: 60, // Set a fixed height for the button

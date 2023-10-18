@@ -85,8 +85,8 @@ class _EquipaPageState extends State<EquipaPage> {
                 dotsCount: 3,
                 position: currentIndex,
                 decorator: DotsDecorator(
-                  size: const Size.square(9.0),
-                  activeSize: const Size(9.0, 9.0),
+                  size: const Size.square(12.0),
+                  activeSize: const Size(12.0, 12.0),
                   activeShape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0),
                   ),
