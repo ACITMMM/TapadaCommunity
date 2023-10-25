@@ -6,13 +6,15 @@ class IntroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.green, // Background color of the third page
+      color: Colors.green,
       child: Stack(
         children: [
           Center(
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20), // Add padding
-              child: Text(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              child: const Text(
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                 style: TextStyle(
                   fontSize: 16,
@@ -26,7 +28,7 @@ class IntroPage extends StatelessWidget {
             child: Align(
               alignment: Alignment.topCenter,
               child: Padding(
-                padding: EdgeInsets.all(50),
+                padding: const EdgeInsets.all(50),
                 child: Image.asset(
                   'assets/logo.png',
                   width: 100,

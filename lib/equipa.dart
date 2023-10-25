@@ -23,32 +23,32 @@ class _EquipaPageState extends State<EquipaPage> {
               Stack(
                 children: [
                   Container(
-                    color: Colors.green, // Set the background color to green
+                    color: Colors.green,
                     child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            child: Image.asset(
-                              'assets/equipa.png', // Use the transparent logo image
-                              width: 350, // Adjust width as needed
-                              height: 350, // Adjust height as needed
-                              fit: BoxFit.contain, // Adjust the fit as needed
-                            ),
+                          Image.asset(
+                            'assets/equipa.png',
+                            width: 350,
+                            height: 350,
+                            fit: BoxFit.contain,
                           ),
-                          const SizedBox(height: 16), // Add spacing
+                          const SizedBox(height: 16),
                           Container(
-                            padding: EdgeInsets.symmetric(horizontal: 16), // Add padding of 16 units on left and right
-                            child: Text(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                            ),
+                            child: const Text(
                               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                               style: TextStyle(
-                                fontSize: 16, // Adjust the font size as needed
+                                fontSize: 16,
                                 color: Colors.white,
-                                decoration: TextDecoration.none, // Remove underline
+                                decoration: TextDecoration.none,
                               ),
-                              textAlign: TextAlign.center, // Center the text
+                              textAlign: TextAlign.center,
                             ),
-                          )                        
+                          )
                         ],
                       ),
                     ),
@@ -57,18 +57,18 @@ class _EquipaPageState extends State<EquipaPage> {
                     child: Align(
                       alignment: Alignment.topCenter,
                       child: Padding(
-                        padding: EdgeInsets.all(50), // Add 40 units of padding
+                        padding: const EdgeInsets.all(50),
                         child: Image.asset(
-                          'assets/logo.png', // Add your logo image
-                          width: 100, // Adjust width as needed
-                          height: 100, // Adjust height as needed
+                          'assets/logo.png',
+                          width: 100,
+                          height: 100,
                         ),
                       ),
                     ),
                   ),
                 ],
               ),
-              const IntroPage(), // Display the second page
+              const IntroPage(),
               const IntroSecondPage(),
             ],
             onPageChanged: (int index) {

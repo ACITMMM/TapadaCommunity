@@ -7,16 +7,18 @@ class IntroSecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.green, // Background color of the third page
+      color: Colors.green,
       child: Stack(
         children: [
           Center(
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20), // Add padding
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                     style: TextStyle(
                       fontSize: 16,
@@ -28,10 +30,15 @@ class IntroSecondPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        MaterialPageRoute(
+                          builder: (context) => const LoginPage(),
+                        ),
                       );
                     },
-                    icon: Icon(Icons.arrow_forward, color: Colors.white),
+                    icon: const Icon(
+                      Icons.arrow_forward,
+                      color: Colors.white,
+                    ),
                   ),
                 ],
               ),
@@ -41,7 +48,7 @@ class IntroSecondPage extends StatelessWidget {
             child: Align(
               alignment: Alignment.topCenter,
               child: Padding(
-                padding: EdgeInsets.all(50),
+                padding: const EdgeInsets.all(50),
                 child: Image.asset(
                   'assets/logo.png',
                   width: 100,
