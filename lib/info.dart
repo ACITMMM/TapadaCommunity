@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 class InfoPage extends StatelessWidget {
+  const InfoPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Info'),
+        title: const Text('Info'),
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'This is the Info Page',
           style: TextStyle(fontSize: 24.0),

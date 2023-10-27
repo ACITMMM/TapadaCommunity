@@ -4,7 +4,6 @@ import 'equipa.dart';
 import 'services_home.dart';
 
 import 'dart:convert';
-import 'dart:typed_data'; 
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -14,7 +13,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
     super.initState();
@@ -28,83 +26,74 @@ class _SplashScreenState extends State<SplashScreen> {
   final cacheManager = CacheManager(
     Config(
       'register',
-      stalePeriod: Duration(days: 90),
+      stalePeriod: const Duration(days: 90),
     ),
   );
 
   Future<Map<String, String>?> getUserData() async {
     try {
       final fileInfo = await cacheManager.getFileFromCache('user_data.json');
-      if ( fileInfo != null) {
-        const JsonDecoder decoder = JsonDecoder();
+      if (fileInfo != null) {
         final decodedData = jsonDecode(fileInfo.file.readAsStringSync());
         return Map<String, String>.from(decodedData);
-      }
-      else {
+      } else {
         return null;
       }
     } catch (e) {
-      print('Error: $e');
+      debugPrint('Error: $e');
       return null;
     }
   }
 
   void _checkEmailCache() async {
-    final userData = await getUserData();
-    if (userData != null) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => ServicesPage(),
-        ),
-      );
-    } else {
+    await getUserData().then((value) {
+      if (value != null) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const ServicesPage(),
+          ),
+        );
+        return;
+      }
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => EquipaPage(),
+          builder: (context) => const EquipaPage(),
         ),
       );
-    }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/home.png'), // Background image
-                fit: BoxFit.cover, // Adjust the fit as needed
-              ),
-            ),
-          ),   
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [            
-                Image.asset(
-                  'assets/logo.png', // Path to your logo image
-                  width: 150, // Adjust the width as needed
-                  height: 150, // Adjust the height as needed
-                ),
-                const SizedBox(height: 16), // Add spacing
-                Text(
-                  'ACITMMM',
-                  style: TextStyle(
-                    fontSize: 20, // Adjust the font size as needed
-                    fontWeight: FontWeight.bold, // Adjust the font weight as needed
-                    color: Colors.white,
-                  ),
-                ),
-              ]
+        body: Stack(children: [
+      Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/home.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+      Center(
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Image.asset(
+            'assets/logo.png',
+            width: 150,
+            height: 150,
+          ),
+          const SizedBox(height: 16),
+          const Text(
+            'ACITMMM',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
             ),
           ),
-        ]        
-      )
-    );
+        ]),
+      ),
+    ]));
   }
 }
-
-

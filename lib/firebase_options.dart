@@ -70,7 +70,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '89634379752',
     projectId: 'tapadacommunity',
     storageBucket: 'tapadacommunity.appspot.com',
-    iosClientId: '89634379752-5pd5hs7lb299v1p39gunok0oucein3jp.apps.googleusercontent.com',
+    iosClientId:
+        '89634379752-5pd5hs7lb299v1p39gunok0oucein3jp.apps.googleusercontent.com',
     iosBundleId: 'org.acitmmm.tapadacommunity',
   );
 }

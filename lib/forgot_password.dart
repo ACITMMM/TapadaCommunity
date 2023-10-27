@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class ForgotPasswordPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
 
+  ForgotPasswordPage({Key? key}) : super(key: key);
+
   bool _validateEmail(String value) {
     String emailPattern = r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$';
     RegExp regex = RegExp(emailPattern);
@@ -18,11 +20,11 @@ class ForgotPasswordPage extends StatelessWidget {
             color: Colors.green,
             child: Center(
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Container(
+                    SizedBox(
                       height: 50,
                       child: TextField(
                         controller: _emailController,
@@ -37,7 +39,7 @@ class ForgotPasswordPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     SizedBox(
                       height: 50,
                       width: double.infinity,
@@ -49,7 +51,7 @@ class ForgotPasswordPage extends StatelessWidget {
                             // Show an error message or perform other actions for invalid input
                           }
                         },
-                        child: Text('Reset Password'),
+                        child: const Text('Reset Password'),
                       ),
                     ),
                   ],

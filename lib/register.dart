@@ -5,23 +5,39 @@ import 'package:tapadacommunity/auth.dart';
 import 'welcome.dart';
 
 import 'dart:convert';
-import 'dart:typed_data'; 
+import 'dart:typed_data';
 
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
 
-class RegisterPage extends StatelessWidget {
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _lastnameController = TextEditingController();
-  final TextEditingController _sex = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
 
-  final List<String> staticSexValues = ['Male', 'Female', 'Prefer not to inform'];
+  final TextEditingController _lastnameController = TextEditingController();
+
+  final TextEditingController _sex = TextEditingController();
+
+  final TextEditingController _emailController = TextEditingController();
+
+  final TextEditingController _passwordController = TextEditingController();
+
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+
+  final List<String> staticSexValues = [
+    'Male',
+    'Female',
+    'Prefer not to inform'
+  ];
 
   final cacheManager = CacheManager(
     Config(
       'register',
-      stalePeriod: Duration(days: 90),
+      stalePeriod: const Duration(days: 90),
     ),
   );
 
@@ -34,67 +50,68 @@ class RegisterPage extends StatelessWidget {
 
   void _registerWithEmailAndPassword(BuildContext context) async {
     try {
-
       await signInWithEmailAndPassword(
         email: _emailController.text,
         password: _passwordController.text,
       );
 
-      final json = {'name': _nameController.text, 'lastname': _lastnameController.text, 'sex': _sex.text, 'email': _emailController.text};
+      final json = {
+        'name': _nameController.text,
+        'lastname': _lastnameController.text,
+        'sex': _sex.text,
+        'email': _emailController.text
+      };
 
       final encoder = JsonUtf8Encoder();
       final encodedString = encoder.convert(json);
       final uint8List = Uint8List.fromList(encodedString);
 
-      await cacheManager.putFile(
-        'user_data.json',
-        uint8List,
-      );
-
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => WelcomePage()),
-      );
-
+      await cacheManager.putFile('user_data.json', uint8List).then((value) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const WelcomePage()),
+        );
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
-        _showError(context, 'The email address is already in use by another account.');
+        _showError('The email address is already in use by another account.');
       } else if (e.code == 'invalid-email') {
-        _showError(context, 'Invalid email address.');
+        _showError('Invalid email address.');
       } else if (e.code == 'weak-password') {
-        _showError(context, 'The password provided is too weak.');
+        _showError('The password provided is too weak.');
       } else {
-        _showError(context, 'Error registering user: $e');
+        _showError('Error registering user: $e');
       }
     } catch (e) {
-      _showError(context, 'Unexpected error: $e');
+      _showError('Unexpected error: $e');
     }
   }
 
-  void _showError(BuildContext context, String message) {
+  void _showError(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        duration: Duration(seconds: 5),
+        duration: const Duration(seconds: 5),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold( // Add Scaffold widget
+    return Scaffold(
+      // Add Scaffold widget
       body: Container(
-        color: Colors.green, // Background color of the page
+        color: Colors.green,
         child: Stack(
           children: [
             Center(
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20), // Add padding
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Container(
-                      height: 50, // Set a fixed height for the input fields
+                    SizedBox(
+                      height: 50,
                       child: TextField(
                         controller: _nameController,
                         keyboardType: TextInputType.name,
@@ -108,9 +125,9 @@ class RegisterPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
-                    Container(
-                      height: 50, // Set a fixed height for the input fields
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      height: 50,
                       child: TextField(
                         controller: _lastnameController,
                         keyboardType: TextInputType.name,
@@ -124,16 +141,19 @@ class RegisterPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     DropdownButtonFormField(
                       decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder( 
-                          borderSide: BorderSide(color: Colors.black, width: 1),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Colors.black,
+                            width: 1,
+                          ),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         filled: true,
                         fillColor: Colors.white,
-                      ),                      
+                      ),
                       value: "Male",
                       items: staticSexValues.map((String value) {
                         return DropdownMenuItem<String>(
@@ -145,9 +165,9 @@ class RegisterPage extends StatelessWidget {
                         _sex.text = newValue ?? '';
                       },
                     ),
-                    SizedBox(height: 10),
-                    Container(
-                      height: 50, // Set a fixed height for the input fields
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      height: 50,
                       child: TextField(
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
@@ -161,9 +181,9 @@ class RegisterPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
-                    Container(
-                      height: 50, // Set a fixed height for the input fields
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      height: 50,
                       child: TextField(
                         controller: _passwordController,
                         obscureText: true,
@@ -177,8 +197,8 @@ class RegisterPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
-                    Container(
+                    const SizedBox(height: 10),
+                    SizedBox(
                       height: 50, // Set a fixed height for the input fields
                       child: TextField(
                         controller: _confirmPasswordController,
@@ -193,21 +213,24 @@ class RegisterPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     SizedBox(
-                      height: 50, // Set a fixed height for the button
+                      height: 50,
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
                           if (_validateEmail(_emailController.text) &&
                               _passwordController.text.isNotEmpty &&
-                              _passwordController.text == _confirmPasswordController.text) {
-                              _registerWithEmailAndPassword(context);
+                              _passwordController.text ==
+                                  _confirmPasswordController.text) {
+                            _registerWithEmailAndPassword(context);
                           } else {
-                            _showError(context, 'Invalid input. Please check your email and password.');
+                            _showError(
+                              'Invalid input. Please check your email and password.',
+                            );
                           }
                         },
-                        child: Text('Register'),
+                        child: const Text('Register'),
                       ),
                     ),
                   ],
@@ -218,7 +241,7 @@ class RegisterPage extends StatelessWidget {
               child: Align(
                 alignment: Alignment.topCenter,
                 child: Padding(
-                  padding: EdgeInsets.all(50),
+                  padding: const EdgeInsets.all(50),
                   child: Image.asset(
                     'assets/logo.png',
                     width: 100,

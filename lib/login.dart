@@ -8,8 +8,7 @@ import 'forgot_password.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:convert';
-import 'dart:typed_data'; 
-
+import 'dart:typed_data';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -22,28 +21,32 @@ class LoginPage extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-   MyHomePage({Key? key}) : super(key: key);
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
 
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _emailController = TextEditingController();
+
   final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildContainer(context)
-    );
+    return Scaffold(body: _buildContainer(context));
   }
 
   final cacheManager = CacheManager(
     Config(
       'register',
-      stalePeriod: Duration(days: 90),
+      stalePeriod: const Duration(days: 90),
     ),
   );
 
@@ -55,71 +58,65 @@ class MyHomePage extends StatelessWidget {
   }
 
   void _registerWithEmailAndPassword(BuildContext context) async {
-      try {
-
-        await signInWithEmailAndPassword(
-          email: _emailController.text,
-          password: _passwordController.text,
-        );
-
-        final json = {'email': _emailController.text};
-
-        final encoder = JsonUtf8Encoder();
-        final encodedString = encoder.convert(json);
-        final uint8List = Uint8List.fromList(encodedString);
-
-        await cacheManager.putFile(
-          'user_data.json',
-          uint8List,
-        );
-
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => WelcomePage()),
-        );
-
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'email-already-in-use') {
-          _showError(context, 'The email address is already in use by another account.');
-        } else if (e.code == 'invalid-email') {
-          _showError(context, 'Invalid email address.');
-        } else if (e.code == 'weak-password') {
-          _showError(context, 'The password provided is too weak.');
-        } else {
-          _showError(context, 'Error registering user: $e');
-        }
-      } catch (e) {
-        _showError(context, 'Unexpected error: $e');
-      }
-    }
-
-  void _registerWithGoogle(BuildContext context) async {
     try {
-
-      await signInWithGoogle();
-
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => WelcomePage()),
+      await signInWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
       );
 
+      final json = {'email': _emailController.text};
+
+      final encoder = JsonUtf8Encoder();
+      final encodedString = encoder.convert(json);
+      final uint8List = Uint8List.fromList(encodedString);
+
+      await cacheManager.putFile('user_data.json', uint8List).then((value) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const WelcomePage()),
+        );
+      });
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'email-already-in-use') {
+        _showError('The email address is already in use by another account.');
+      } else if (e.code == 'invalid-email') {
+        _showError('Invalid email address.');
+      } else if (e.code == 'weak-password') {
+        _showError('The password provided is too weak.');
+      } else {
+        _showError('Error registering user: $e');
+      }
     } catch (e) {
-      _showError(context, 'Unexpected error: $e');
+      _showError('Unexpected error: $e');
     }
   }
 
-  void _showError(BuildContext context, String message) {
+  void _registerWithGoogle() async {
+    try {
+      await signInWithGoogle().then((value) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const WelcomePage()),
+        );
+      });
+    } catch (e) {
+      debugPrint('exec $e');
+      _showError('Unexpected error: $e');
+    }
+  }
+
+  void _showError(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        duration: Duration(seconds: 5),
+        duration: const Duration(seconds: 5),
       ),
     );
   }
 
   Widget _buildContainer(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/login_background.png'),
           fit: BoxFit.cover,
@@ -133,8 +130,8 @@ class MyHomePage extends StatelessWidget {
               widthFactor: 0.95,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Text(
+                children: [
+                  const Text(
                     'Hello',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -144,7 +141,12 @@ class MyHomePage extends StatelessWidget {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      color: Color.fromRGBO(50, 50, 50, 1).withOpacity(0.8),
+                      color: const Color.fromRGBO(
+                        50,
+                        50,
+                        50,
+                        1,
+                      ).withOpacity(0.8),
                       border: Border.all(
                         color: Colors.black,
                         width: 2.0, // Frame width
@@ -161,17 +163,20 @@ class MyHomePage extends StatelessWidget {
                             controller: _emailController,
                             decoration: InputDecoration(
                               hintText: '    E-mail',
-                              filled: true, // Set the field to be filled
-                              fillColor: Colors.white, // Set the fill color to white                        
-                              border: OutlineInputBorder( // Add border to the text input
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                // Add border to the text input
                                 borderRadius: BorderRadius.circular(20.0),
-                              ),    
-                              contentPadding: EdgeInsets.symmetric(vertical: 12), // Adjust the vertical padding
-                            ),                      
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 12,
+                              ),
+                            ),
                           ),
                           const SizedBox(height: 10),
-                          Container(
-                            height: 50, // Set a fixed height for the input fields
+                          SizedBox(
+                            height: 50,
                             child: TextField(
                               controller: _passwordController,
                               obscureText: true,
@@ -184,43 +189,45 @@ class MyHomePage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          ),                          
+                          ),
                           const SizedBox(height: 10),
                           Container(
-                            height: 60, // Set a fixed height for the button
-                            padding: EdgeInsets.only(bottom: 10), // Add bottom padding
+                            height: 60,
+                            padding: const EdgeInsets.only(bottom: 10),
                             child: ElevatedButton(
                               onPressed: () {
-                                  if (_validateEmail(_emailController.text) &&
-                                      _passwordController.text.isNotEmpty) {
-                                      _registerWithEmailAndPassword(context);
-                                  } else {
-                                    _showError(context, 'Invalid input. Please check your email and password.');
-                                  }
+                                if (_validateEmail(_emailController.text) &&
+                                    _passwordController.text.isNotEmpty) {
+                                  _registerWithEmailAndPassword(context);
+                                } else {
+                                  _showError(
+                                    'Invalid input. Please check your email and password.',
+                                  );
+                                }
                               },
                               style: ElevatedButton.styleFrom(
-                                primary: Colors.green, // Set the button color to green
+                                backgroundColor: Colors.green,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20.0),
-                                ),                          
+                                ),
                               ),
-                              child: Text('Continue'),
+                              child: const Text('Continue'),
                             ),
                           ),
-                          Text(
+                          const Text(
                             'or',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Colors.white, // Text color
                               fontSize: 20,
                             ),
-                          ),                    
+                          ),
                           const SizedBox(height: 10),
                           SocialLoginButton(
                             borderRadius: 20,
                             buttonType: SocialLoginButtonType.facebook,
                             onPressed: () {
-                              _showError(context, 'Not Implemented yet');
+                              _showError('Not Implemented yet');
                             },
                           ),
                           const SizedBox(height: 10),
@@ -228,7 +235,7 @@ class MyHomePage extends StatelessWidget {
                             borderRadius: 20,
                             buttonType: SocialLoginButtonType.google,
                             onPressed: () {
-                              _registerWithGoogle(context);
+                              _registerWithGoogle();
                             },
                           ),
                           const SizedBox(height: 10),
@@ -236,7 +243,7 @@ class MyHomePage extends StatelessWidget {
                             buttonType: SocialLoginButtonType.apple,
                             borderRadius: 20,
                             onPressed: () {
-                              _showError(context, 'Not Implemented yet');
+                              _showError('Not Implemented yet');
                             },
                           ),
                           const SizedBox(height: 10),
@@ -244,16 +251,16 @@ class MyHomePage extends StatelessWidget {
                             child: Text.rich(
                               TextSpan(
                                 text: 'Don\'t have a login yet? ',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
                                 ),
                                 children: [
                                   TextSpan(
                                     text: 'Register',
-                                    style: TextStyle(
-                                      color: Colors.green, // Change the color to indicate it's a link
-                                      decoration: TextDecoration.underline, // Add underline to indicate it's a link
+                                    style: const TextStyle(
+                                      color: Colors.green,
+                                      decoration: TextDecoration.underline,
                                     ),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
@@ -262,13 +269,16 @@ class MyHomePage extends StatelessWidget {
                                         // For this example, let's assume there's a RegisterPage widget.
                                         Navigator.push(
                                           context,
-                                          MaterialPageRoute(builder: (context) => RegisterPage()),
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const RegisterPage(),
+                                          ),
                                         );
                                       },
                                   ),
                                 ],
                               ),
-                          ),
+                            ),
                           ),
                           GestureDetector(
                             onTap: () {
@@ -277,16 +287,19 @@ class MyHomePage extends StatelessWidget {
                               // For this example, let's assume there's a RegisterPage widget.
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => ForgotPasswordPage()),
+                                MaterialPageRoute(
+                                    builder: (context) => ForgotPasswordPage()),
                               );
                             },
-                            child: Text(
+                            child: const Text(
                               'Forgot your password ?',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: Colors.blue, // Change the color to indicate it's a link
+                                color: Colors
+                                    .blue, // Change the color to indicate it's a link
                                 fontSize: 16,
-                                decoration: TextDecoration.underline, // Add underline to indicate it's a link
+                                decoration: TextDecoration
+                                    .underline, // Add underline to indicate it's a link
                               ),
                             ),
                           ),
