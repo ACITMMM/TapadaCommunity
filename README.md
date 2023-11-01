@@ -58,7 +58,9 @@ These instructions will guide you through setting up the development environment
    ```
 4. Create the debug key.
 
-```keytool -genkey -v -keystore ~/.android/debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000
+```bash
+$ keytool -genkey -v -keystore ~/.android/debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000
+
 What is your first and last name?
   [Unknown]:  Tapada
 What is the name of your organizational unit?
@@ -73,10 +75,10 @@ What is the two-letter country code for this unit?
   [Unknown]:  PT
 Is CN=Tapada, OU=Community, O=TDM, L=Cintra, ST=LX, C=PT correct?
   [no]:  yes
-
 Generating 2,048 bit RSA key pair and self-signed certificate (SHA256withRSA) with a validity of 10,000 days
-	for: CN=Tapada, OU=Community, O=TDM, L=Cintra, ST=LX, C=PT```
-   
+	for: CN=Tapada, OU=Community, O=TDM, L=Cintra, ST=LX, C=PT
+```
+  
 5. List the SHA-1 and SHA-256 fingerprints for your `debug.keystore`, which usually lies on an `.android` folder inside your home folder.
 
    5a. For Linux and Mac:
