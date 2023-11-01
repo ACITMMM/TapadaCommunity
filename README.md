@@ -56,16 +56,36 @@ These instructions will guide you through setting up the development environment
    ```bash
    flutter pub get
    ```
-   
-4. List the SHA-1 and SHA-256 fingerprints for your `debug.keystore`, which usually lies on an `.android` folder inside your home folder.
+4. Create the debug key.
 
-   4a. For Linux and Mac:
+```keytool -genkey -v -keystore ~/.android/debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000
+What is your first and last name?
+  [Unknown]:  Tapada
+What is the name of your organizational unit?
+  [Unknown]:  Community
+What is the name of your organization?
+  [Unknown]:  TDM
+What is the name of your City or Locality?
+  [Unknown]:  Cintra
+What is the name of your State or Province?
+  [Unknown]:  LX
+What is the two-letter country code for this unit?
+  [Unknown]:  PT
+Is CN=Tapada, OU=Community, O=TDM, L=Cintra, ST=LX, C=PT correct?
+  [no]:  yes
+
+Generating 2,048 bit RSA key pair and self-signed certificate (SHA256withRSA) with a validity of 10,000 days
+	for: CN=Tapada, OU=Community, O=TDM, L=Cintra, ST=LX, C=PT```
+   
+5. List the SHA-1 and SHA-256 fingerprints for your `debug.keystore`, which usually lies on an `.android` folder inside your home folder.
+
+   5a. For Linux and Mac:
 
    ```bash
    keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android
    ```
 
-   4b. For Windows:
+   5b. For Windows:
 
    ```bash
    keytool -list -v -keystore C:\Users\<your-username>\.android\debug.keystore -alias androiddebugkey -storepass android -keypass android
@@ -82,12 +102,12 @@ These instructions will guide you through setting up the development environment
    ```
 
 
-5. Add SHA certificate fingerprints to the [Android App on Firebase project](https://console.firebase.google.com/u/0/project/tapadacommunity/settings/general/android:org.acitmmm.tapadacommunity).
+6. Add SHA certificate fingerprints to the [Android App on Firebase project](https://console.firebase.google.com/u/0/project/tapadacommunity/settings/general/android:org.acitmmm.tapadacommunity).
    
    **IMPORTANT**: Add both SHA-1 and SHA-256.
       
 
-6. Run the app:
+7. Run the app:
 
    ```bash
    flutter run
@@ -110,7 +130,7 @@ These instructions will guide you through setting up the development environment
       [4]: Chrome (chrome)
       ```
 
-7. After choose anh device flutter will compile the code for the platform and a menu like that might appear:
+8. After choose anh device flutter will compile the code for the platform and a menu like that might appear:
 
    ```bash
    Launching lib/main.dart on SM A405FN in debug mode...
