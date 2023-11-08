@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:tapadacommunity/models/detail_service_model.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tapadacommunity/extensions/build_context_extension.dart';
 
 class DetailServicePage extends StatelessWidget {
   final bool isDarkGreen;
-  final DetailServiceModel service;
+  final String title;
+  final String subTitle;
+  final String desc;
 
   const DetailServicePage({
     Key? key,
-    required this.service,
     this.isDarkGreen = false,
+    required this.title,
+    required this.subTitle,
+    required this.desc,
   }) : super(key: key);
 
   @override
@@ -41,7 +46,7 @@ class DetailServicePage extends StatelessWidget {
                 ),
               ),
               child: SizedBox(
-                height: MediaQuery.of(context).size.height * .35,
+                height: context.screenHeight * .35,
                 width: double.infinity,
                 child: Padding(
                   padding: const EdgeInsets.all(24.0),
@@ -50,16 +55,16 @@ class DetailServicePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Text(
-                        service.title,
-                        style: const TextStyle(
-                          fontSize: 28.0,
+                        title,
+                        style: TextStyle(
+                          fontSize: 28.sp,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       const SizedBox(height: 6.0),
                       Text(
-                        service.subtitle,
+                        subTitle,
                         style: const TextStyle(color: Colors.white),
                       ),
                     ],
@@ -69,7 +74,7 @@ class DetailServicePage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(24.0),
-              child: Text(service.desc),
+              child: Text(desc),
             ),
           ],
         ),

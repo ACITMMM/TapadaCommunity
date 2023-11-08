@@ -1,15 +1,21 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
-import '../models/detail_service_model.dart';
 import 'detail_service_page.dart';
 import 'settings.dart';
 
 const itemWithGreenAccentColor = <int>[1, 2, 5, 6, 9];
 
-class ServicePage extends StatelessWidget {
+class ServicePage extends StatefulWidget {
   const ServicePage({Key? key}) : super(key: key);
 
+  @override
+  State<ServicePage> createState() => _ServicePageState();
+}
+
+class _ServicePageState extends State<ServicePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +29,7 @@ class ServicePage extends StatelessWidget {
             onPressed: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (_) => const SettingsPage()),
-            ),
+            ).then((value) => setState(() {})),
             icon: const Icon(
               Icons.settings,
               color: Colors.black,
@@ -61,28 +67,40 @@ class ServicePage extends StatelessWidget {
                 padding: EdgeInsets.all(24.sp),
                 crossAxisSpacing: 24.sp,
                 mainAxisSpacing: 24.sp,
-                children: services
-                    .asMap()
-                    .entries
-                    .map(
-                      (e) => _ServiceItemButton(
-                        index: e.key,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => DetailServicePage(
-                                service: e.value,
-                                isDarkGreen: itemWithGreenAccentColor.contains(
-                                  e.key,
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    )
-                    .toList(),
+                children: [
+                  _ServiceItemButton(
+                    index: 0,
+                    title: translate('serviceItems.health'),
+                  ),
+                  _ServiceItemButton(
+                    index: 1,
+                    title: translate('serviceItems.socialSecurity'),
+                  ),
+                  _ServiceItemButton(
+                    index: 2,
+                    title: translate('serviceItems.nationality'),
+                  ),
+                  _ServiceItemButton(
+                    index: 3,
+                    title: translate('serviceItems.initiatives'),
+                  ),
+                  _ServiceItemButton(
+                    index: 4,
+                    title: translate('serviceItems.housing'),
+                  ),
+                  _ServiceItemButton(
+                    index: 5,
+                    title: translate('serviceItems.finance'),
+                  ),
+                  _ServiceItemButton(
+                    index: 6,
+                    title: translate('serviceItems.info'),
+                  ),
+                  _ServiceItemButton(
+                    index: 7,
+                    title: translate('serviceItems.trainings'),
+                  ),
+                ],
               ),
             ],
           ),
@@ -93,19 +111,30 @@ class ServicePage extends StatelessWidget {
 }
 
 class _ServiceItemButton extends StatelessWidget {
+  final String title;
   final int index;
-  final Function()? onTap;
 
-  const _ServiceItemButton({
-    Key? key,
-    required this.index,
-    required this.onTap,
-  }) : super(key: key);
+  const _ServiceItemButton(
+      {Key? key, required this.title, required this.index, j})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: () async {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => DetailServicePage(
+              desc:
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur non tortor est. Nulla feugiat nibh odio, sit amet fermentum nisl dictum vitae. Cras ultricies venenatis mi sit amet fermentum. Suspendisse potenti. Integer ligula nisi, molestie quis pretium sed, porttitor ac lacus. Pellentesque sit amet urna diam. Integer ultricies molestie odio, quis facilisis odio lobortis volutpat. Proin faucibus ipsum metus, ut condimentum sapien laoreet ac. Praesent ligula augue, volutpat ut ultrices id, venenatis ac tortor. Donec ornare ac turpis nec efficitur. Aenean accumsan ex eu ex laoreet, faucibus posuere lorem tempor. Duis in purus sed sapien venenatis rhoncus sed condimentum felis. Nullam scelerisque augue non ante varius, sit amet aliquet dolor gravida. Sed ullamcorper non diam eu hendrerit.',
+              subTitle: 'Lorem ipsum dolor sit amet',
+              title: title,
+              isDarkGreen: itemWithGreenAccentColor.contains(index),
+            ),
+          ),
+        );
+      },
       child: Ink(
         decoration: BoxDecoration(
           boxShadow: const [
@@ -118,15 +147,19 @@ class _ServiceItemButton extends StatelessWidget {
           color: (itemWithGreenAccentColor.contains(index))
               ? Colors.green[900]
               : Colors.green,
-          borderRadius: BorderRadius.circular(32.0),
+          borderRadius: BorderRadius.circular(32.sp),
         ),
         child: Center(
-          child: Text(
-            services[index].title,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 16.0,
-              fontWeight: FontWeight.w600,
+          child: Padding(
+            padding: EdgeInsets.all(12.sp),
+            child: Text(
+              title,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w600,
+              ),
+              textAlign: TextAlign.center,
             ),
           ),
         ),

@@ -1,0 +1,42 @@
+{
+  "splashScreenText": "Добро пожаловать в мое приложение",
+  "startButton": "Начать",
+  "cancel": "Отмена",
+  "delete": "Удалить",
+  "no": "Нет",
+  "yes": "Да",
+  "language": "Язык",
+  "registration": {
+    "hello": "Привет",
+    "email": "Электронная почта",
+    "password": "Пароль",
+    "continue": "Продолжить",
+    "or": "Или",
+    "signInWithFB": "Войти с помощью Facebook",
+    "signInWithGoogle": "Войти с помощью Google",
+    "signInWithApple": "Войти с помощью Apple",
+    "dontHaveLoginYet": "Еще нет аккаунта?",
+    "register": "Зарегистрироваться",
+    "forgotPassword": "Забыли пароль?",
+    "loginError": "Неверный ввод. Пожалуйста, проверьте вашу электронную почту и пароль."
+  },
+  "serviceItems": {
+    "health": "Здоровье",
+    "socialSecurity": "Социальная защита",
+    "nationality": "Национальность",
+    "initiatives": "Инициативы",
+    "housing": "Жилье",
+    "finance": "Финансы",
+    "info": "+ИНФО",
+    "trainings": "Обучение"
+  },
+  "setting": {
+    "setting": "Настройки",
+    "deleteAccount": "Удалить аккаунт",
+    "deleteAccountDesc": "Вы уверены, что хотите выйти?",
+    "resetPassword": "Сбросить пароль",
+    "resetPasswordDesc": "Отправить ссылку для сброса пароля на ваш адрес электронной почты?",
+    "signOut": "Выйти",
+    "signOutDesc": "Вы уверены, что хотите выйти?"
+  }
+}

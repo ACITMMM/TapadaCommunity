@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tapadacommunity/extensions/build_context_extension.dart';
 
 import 'home_page.dart';
 
@@ -13,75 +15,61 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          PageView(
-            children: [
-              Stack(
-                children: [
-                  Container(
-                    color: Colors.green,
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/welcome.png',
-                            width: 350,
-                            height: 350,
-                            fit: BoxFit.contain,
-                          ),
-                          const SizedBox(height: 16),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: const Text(
-                              'Welcome X',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.white,
-                                decoration: TextDecoration.none,
-                              ),
-                              textAlign: TextAlign.center,
+      backgroundColor: Colors.green,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 32.sp),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 18.h),
+                  child: Image.asset(
+                    'assets/logo.png',
+                    height: context.screenHeight * .1,
+                    fit: BoxFit.fitHeight,
+                  ),
+                ),
+                Image.asset(
+                  'assets/welcome.png',
+                  height: context.screenHeight * .3,
+                  fit: BoxFit.fitHeight,
+                ),
+                Column(
+                  children: [
+                    const Text(
+                      'Welcome X',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        decoration: TextDecoration.none,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomePage(
+                              startSpalsh: false,
                             ),
                           ),
-                          IconButton(
-                            onPressed: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const HomePage(
-                                    startSpalsh: false,
-                                  ),
-                                ),
-                              );
-                            },
-                            icon: const Icon(
-                              Icons.arrow_forward,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.arrow_forward,
+                        color: Colors.white,
                       ),
                     ),
-                  ),
-                  Positioned.fill(
-                    child: Align(
-                      alignment: Alignment.topCenter,
-                      child: Padding(
-                        padding: const EdgeInsets.all(50),
-                        child: Image.asset(
-                          'assets/logo.png',
-                          width: 100,
-                          height: 100,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+                SizedBox(),
+              ],
+            ),
           ),
-        ],
+        ),
       ),
     );
   }

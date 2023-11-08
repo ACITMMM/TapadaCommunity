@@ -1,0 +1,42 @@
+{
+  "splashScreenText": "Selamat datang di Aplikasi Saya",
+  "startButton": "Mulai",
+  "cancel": "Batal",
+  "delete": "Hapus",
+  "no": "Tidak",
+  "yes": "Ya",
+  "language": "Bahasa",
+  "registration": {
+    "hello": "Halo",
+    "email": "Email",
+    "password": "Kata Sandi",
+    "continue": "Lanjutkan",
+    "or": "Atau",
+    "signInWithFB": "Masuk dengan Facebook",
+    "signInWithGoogle": "Masuk dengan Google",
+    "signInWithApple": "Masuk dengan Apple",
+    "dontHaveLoginYet": "Belum punya akun?",
+    "register": "Daftar",
+    "forgotPassword": "Lupa kata sandi Anda?",
+    "loginError": "Input tidak valid. Silakan periksa email dan kata sandi Anda."
+  },
+  "serviceItems": {
+    "health": "Kesehatan",
+    "socialSecurity": "Keamanan Sosial",
+    "nationality": "Kebangsaan",
+    "initiatives": "Inisiatif",
+    "housing": "Perumahan",
+    "finance": "Keuangan",
+    "info": "+INFO",
+    "trainings": "Pelatihan"
+  },
+  "setting": {
+    "setting": "Pengaturan",
+    "deleteAccount": "Hapus Akun",
+    "deleteAccountDesc": "Apakah Anda yakin ingin keluar?",
+    "resetPassword": "Atur Ulang Kata Sandi",
+    "resetPasswordDesc": "Kirim tautan atur ulang kata sandi ke alamat email Anda?",
+    "signOut": "Keluar",
+    "signOutDesc": "Apakah Anda yakin ingin keluar?"
+  }
+}

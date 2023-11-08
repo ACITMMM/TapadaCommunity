@@ -1,0 +1,42 @@
+{
+  "splashScreenText": "Welcome to My App",
+  "startButton": "Get Started",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "no": "No",
+  "yes": "Yes",
+  "language": "Language",
+  "registration": {
+    "hello": "Hello",
+    "email": "Email",
+    "password": "Password",
+    "continue": "Continue",
+    "or": "Or",
+    "signInWithFB": "Sign In with Facebook",
+    "signInWithGoogle": "Sign In with Google",
+    "signInWithApple": "Sign In with Apple",
+    "dontHaveLoginYet": "Don't have a login yet?",
+    "register": "Register",
+    "forgotPassword": "Forgot your password?",
+    "loginError": "Invalid input. Please check your email and password."
+  },
+  "serviceItems": {
+    "health": "Health",
+    "socialSecurity": "Social Security",
+    "nationality": "Nationality",
+    "initiatives": "Initiatives",
+    "housing": "Housing",
+    "finance": "Finance",
+    "info": "+INFO",
+    "trainings": "Trainings"
+  },
+  "setting": {
+    "setting": "Settings",
+    "deleteAccount": "Delete Account",
+    "deleteAccountDesc": "Are you sure you want to sign out?",
+    "resetPassword": "Reset Password",
+    "resetPasswordDesc": "Send a password reset link to your email address?",
+    "signOut": " Sign Out",
+    "signOutDesc": "Are you sure you want to sign out?"
+  }
+}
