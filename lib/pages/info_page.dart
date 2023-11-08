@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tapadacommunity/extensions/build_context_extension.dart';
 
 class InfoPage extends StatefulWidget {
   const InfoPage({Key? key}) : super(key: key);
@@ -32,8 +33,8 @@ class _InfoPageState extends State<InfoPage> {
         children: [
           Image.asset(
             'assets/info-placeholder.jpeg',
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
+            height: context.screenHeight,
+            width: context.screenWidth,
             fit: BoxFit.cover,
           ),
           Align(
@@ -45,8 +46,8 @@ class _InfoPageState extends State<InfoPage> {
                 builder: (_, isExpand, __) => AnimatedContainer(
                   duration: duration,
                   height: isExpand
-                      ? MediaQuery.of(context).size.height * .7
-                      : MediaQuery.of(context).size.height * .4,
+                      ? context.screenHeight * .7
+                      : context.screenHeight * .4,
                   width: double.infinity,
                   child: Padding(
                     padding: EdgeInsets.all(12.sp),
@@ -104,8 +105,7 @@ class _InfoPageState extends State<InfoPage> {
             valueListenable: _isExpand,
             builder: (_, isExpand, __) => AnimatedPositioned(
               duration: duration,
-              bottom:
-                  isExpand ? 70.h : MediaQuery.of(context).size.height * .36,
+              bottom: isExpand ? 70.h : context.screenHeight * .36,
               right: 12.0,
               child: ValueListenableBuilder<bool>(
                 valueListenable: _isExpand,
@@ -119,7 +119,7 @@ class _InfoPageState extends State<InfoPage> {
                           borderRadius: BorderRadius.circular(12.sp),
                         ),
                         child: SizedBox(
-                          width: MediaQuery.of(context).size.width * .2,
+                          width: context.screenWidth * .2,
                           child: Padding(
                             padding: EdgeInsets.all(12.sp),
                             child: const Text(
@@ -137,7 +137,7 @@ class _InfoPageState extends State<InfoPage> {
                           borderRadius: BorderRadius.circular(12.sp),
                         ),
                         child: SizedBox(
-                          width: MediaQuery.of(context).size.width * .2,
+                          width: context.screenWidth * .2,
                           child: Padding(
                             padding: EdgeInsets.all(12.sp),
                             child: const Text(

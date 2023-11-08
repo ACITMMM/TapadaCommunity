@@ -1,0 +1,44 @@
+
+
+{
+  "splashScreenText": "Bienvenue dans Mon Application",
+  "startButton": "Commencer",
+  "cancel": "Annuler",
+  "delete": "Supprimer",
+  "no": "Non",
+  "yes": "Oui",
+  "language": "Langue",
+  "registration": {
+    "hello": "Bonjour",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "continue": "Continuer",
+    "or": "Ou",
+    "signInWithFB": "Se connecter avec Facebook",
+    "signInWithGoogle": "Se connecter avec Google",
+    "signInWithApple": "Se connecter avec Apple",
+    "dontHaveLoginYet": "Vous n'avez pas encore de compte ?",
+    "register": "S'inscrire",
+    "forgotPassword": "Mot de passe oublié ?",
+    "loginError": "Entrée non valide. Veuillez vérifier votre e-mail et votre mot de passe."
+  },
+  "serviceItems": {
+    "health": "Santé",
+    "socialSecurity": "Sécurité sociale",
+    "nationality": "Nationalité",
+    "initiatives": "Initiatives",
+    "housing": "Logement",
+    "finance": "Finance",
+    "info": "+INFO",
+    "trainings": "Formations"
+  },
+  "setting": {
+    "setting": "Paramètres",
+    "deleteAccount": "Supprimer le compte",
+    "deleteAccountDesc": "Êtes-vous sûr de vouloir vous déconnecter ?",
+    "resetPassword": "Réinitialiser le mot de passe",
+    "resetPasswordDesc": "Envoyer un lien de réinitialisation de mot de passe à votre adresse e-mail ?",
+    "signOut": "Déconnexion",
+    "signOutDesc": "Êtes-vous sûr de vouloir vous déconnecter ?"
+  }
+}

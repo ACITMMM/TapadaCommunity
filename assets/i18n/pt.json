@@ -1,0 +1,42 @@
+{
+  "splashScreenText": "Bem-vindo ao Meu Aplicativo",
+  "startButton": "Começar",
+  "cancel": "Cancelar",
+  "delete": "Excluir",
+  "no": "Não",
+  "yes": "Sim",
+  "language": "Idioma",
+  "registration": {
+    "hello": "Olá",
+    "email": "E-mail",
+    "password": "Senha",
+    "continue": "Continuar",
+    "or": "Ou",
+    "signInWithFB": "Entrar com o Facebook",
+    "signInWithGoogle": "Entrar com o Google",
+    "signInWithApple": "Entrar com a Apple",
+    "dontHaveLoginYet": "Ainda não tem um login?",
+    "register": "Registrar",
+    "forgotPassword": "Esqueceu sua senha?",
+    "loginError": "Entrada inválida. Por favor, verifique seu e-mail e senha."
+  },
+  "serviceItems": {
+    "health": "Saúde",
+    "socialSecurity": "Segurança Social",
+    "nationality": "Nacionalidade",
+    "initiatives": "Iniciativas",
+    "housing": "Moradia",
+    "finance": "Finanças",
+    "info": "+INFO",
+    "trainings": "Treinamentos"
+  },
+  "setting": {
+    "setting": "Configurações",
+    "deleteAccount": "Excluir Conta",
+    "deleteAccountDesc": "Tem certeza de que deseja sair?",
+    "resetPassword": "Redefinir Senha",
+    "resetPasswordDesc": "Enviar um link de redefinição de senha para o seu endereço de e-mail?",
+    "signOut": " Sair",
+    "signOutDesc": "Tem certeza de que deseja sair?"
+  }
+}

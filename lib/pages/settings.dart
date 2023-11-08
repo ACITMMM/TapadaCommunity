@@ -1,43 +1,47 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tapadacommunity/pages/equipa.dart';
 import 'package:tapadacommunity/services/auth_service.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
-import 'splash.dart';
-
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
 
+  @override
+  State<SettingsPage> createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: Text(translate('setting.setting')),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.sp),
         child: Column(
           children: [
             ListTile(
-              title: const Text('Delete Account'),
+              title: Text(translate('setting.deleteAccount')),
               onTap: () {
                 // Add your code for account deletion here
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: const Text('Delete Account'),
-                      content: const Text(
-                        'Are you sure you want to delete your account?',
-                      ),
+                      title: Text(translate('setting.deleteAccount')),
+                      content: Text(translate('setting.deleteAccountDesc')),
                       actions: [
                         TextButton(
-                          child: const Text('Cancel'),
+                          child: Text(translate('cancel')),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
                         ),
                         TextButton(
-                          child: const Text('Delete'),
+                          child: Text(translate('delete')),
                           onPressed: () {
                             // Add logic to delete the account here
                             Navigator.of(context).pop();
@@ -52,26 +56,24 @@ class SettingsPage extends StatelessWidget {
             ),
             const Divider(),
             ListTile(
-              title: const Text('Reset Password'),
+              title: Text(translate('setting.resetPassword')),
               onTap: () {
                 // Add your code for password reset here
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: const Text('Reset Password'),
-                      content: const Text(
-                        'Send a password reset link to your email address?',
-                      ),
+                      title: Text(translate('setting.resetPassword')),
+                      content: Text(translate('setting.resetPasswordDesc')),
                       actions: [
                         TextButton(
-                          child: const Text('Cancel'),
+                          child: Text(translate('cancel')),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
                         ),
                         TextButton(
-                          child: const Text('Send'),
+                          child: Text(translate('cancel')),
                           onPressed: () {
                             // Add logic to send password reset link
                             Navigator.of(context).pop();
@@ -85,26 +87,24 @@ class SettingsPage extends StatelessWidget {
             ),
             const Divider(),
             ListTile(
-              title: const Text('Sign Out'),
+              title: Text(translate('setting.signOut')),
               onTap: () {
                 // Add your code for password reset here
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: const Text('Reset Password'),
-                      content: const Text(
-                        'Are you sure you want to sign out?',
-                      ),
+                      title: Text(translate('setting.signOut')),
+                      content: Text(translate('setting.signOutDesc')),
                       actions: [
                         TextButton(
-                          child: const Text('No'),
+                          child: Text(translate('no')),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
                         ),
                         TextButton(
-                          child: const Text('Yes'),
+                          child: Text(translate('yes')),
                           onPressed: () async {
                             await AuthService().signOut().then((value) {
                               Navigator.pushReplacement(
@@ -124,9 +124,64 @@ class SettingsPage extends StatelessWidget {
                 );
               },
             ),
+            const Divider(),
+            ListTile(
+              title: Text(translate('language')),
+              onTap: () {
+                _onActionSheetPress(context);
+                setState(() {});
+              },
+            ),
           ],
         ),
       ),
     );
   }
+}
+
+void showDemoActionSheet({
+  required BuildContext context,
+  required Widget child,
+}) {
+  showCupertinoModalPopup<String>(
+      context: context,
+      builder: (BuildContext context) => child).then((String? value) {
+    if (value != null) changeLocale(context, value);
+  });
+}
+
+void _onActionSheetPress(BuildContext context) {
+  showDemoActionSheet(
+    context: context,
+    child: CupertinoActionSheet(
+      title: Text(translate('Select language')),
+      actions: <Widget>[
+        CupertinoActionSheetAction(
+          child: Text(translate('English')),
+          onPressed: () => Navigator.pop(context, 'en_US'),
+        ),
+        CupertinoActionSheetAction(
+          child: Text(translate('Spanish')),
+          onPressed: () => Navigator.pop(context, 'es'),
+        ),
+        CupertinoActionSheetAction(
+          child: Text(translate('Russia')),
+          onPressed: () => Navigator.pop(context, 'ru'),
+        ),
+        CupertinoActionSheetAction(
+          child: Text(translate('Indoensia')),
+          onPressed: () => Navigator.pop(context, 'id'),
+        ),
+        CupertinoActionSheetAction(
+          child: Text(translate('Portuguese')),
+          onPressed: () => Navigator.pop(context, 'pt'),
+        ),
+      ],
+      cancelButton: CupertinoActionSheetAction(
+        child: Text(translate('cancel')),
+        isDefaultAction: true,
+        onPressed: () => Navigator.pop(context, null),
+      ),
+    ),
+  );
 }

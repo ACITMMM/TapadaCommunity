@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tapadacommunity/extensions/build_context_extension.dart';
 import 'package:tapadacommunity/pages/splash.dart';
 import 'intro.dart';
 import 'intro_second.dart';
@@ -39,57 +41,41 @@ class _EquipaPageState extends State<EquipaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.green,
       body: Stack(
         children: [
           PageView(
             children: [
-              Stack(
-                children: [
-                  Container(
-                    color: Colors.green,
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/equipa.png',
-                            width: 350,
-                            height: 350,
-                            fit: BoxFit.contain,
-                          ),
-                          const SizedBox(height: 16),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                            ),
-                            child: const Text(
-                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.white,
-                                decoration: TextDecoration.none,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          )
-                        ],
+              SafeArea(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 32.sp),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(height: context.screenHeight * .02),
+                      Image.asset(
+                        'assets/logo.png',
+                        width: context.screenWidth * .3,
+                        fit: BoxFit.fitWidth,
                       ),
-                    ),
-                  ),
-                  Positioned.fill(
-                    child: Align(
-                      alignment: Alignment.topCenter,
-                      child: Padding(
-                        padding: const EdgeInsets.all(50),
-                        child: Image.asset(
-                          'assets/logo.png',
-                          width: 100,
-                          height: 100,
+                      Image.asset(
+                        'assets/equipa.png',
+                        width: context.screenWidth * .5,
+                        fit: BoxFit.fitWidth,
+                      ),
+                      Text(
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          color: Colors.white,
+                          decoration: TextDecoration.none,
                         ),
+                        textAlign: TextAlign.center,
                       ),
-                    ),
+                      SizedBox(height: context.screenHeight * .08),
+                    ],
                   ),
-                ],
+                ),
               ),
               const IntroPage(),
               const IntroSecondPage(),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
+import 'package:tapadacommunity/extensions/build_context_extension.dart';
 import 'package:tapadacommunity/services/auth_service.dart';
 import 'register.dart';
 import 'forgot_password.dart';
@@ -8,6 +10,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import 'welcome.dart';
 
@@ -117,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _buildContainer(BuildContext context) {
-    return Container(
+    return DecoratedBox(
       decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/login_background.png'),
@@ -125,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.sp),
         child: Center(
           child: SingleChildScrollView(
             child: FractionallySizedBox(
@@ -133,12 +136,12 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Text(
-                    'Hello',
+                  Text(
+                    translate('registration.hello'),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.black, // Text color
-                      fontSize: 24,
+                      fontSize: 24.sp,
                     ),
                   ),
                   Container(
@@ -149,53 +152,70 @@ class _MyHomePageState extends State<MyHomePage> {
                         50,
                         1,
                       ).withOpacity(0.8),
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 2.0, // Frame width
-                      ),
-                      borderRadius: BorderRadius.circular(20.0),
+                      border: Border.all(color: Colors.black, width: 2.w),
+                      borderRadius: BorderRadius.circular(20.sp),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: EdgeInsets.all(16.sp),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          TextField(
-                            controller: _emailController,
-                            decoration: InputDecoration(
-                              hintText: '    E-mail',
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(
-                                // Add border to the text input
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              contentPadding: const EdgeInsets.symmetric(
-                                vertical: 12,
-                              ),
+                        children: [
+                          DecoratedBox(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20.sp),
                             ),
-                          ),
-                          const SizedBox(height: 10),
-                          SizedBox(
-                            height: 50,
-                            child: TextField(
-                              controller: _passwordController,
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                hintText: 'Password',
-                                fillColor: Colors.white,
-                                filled: true,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                maxHeight: context.screenHeight * .08,
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 12.sp,
+                                ),
+                                child: TextField(
+                                  controller: _emailController,
+                                  obscureText: true,
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: translate('registration.email'),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                          const SizedBox(height: 10),
+                          SizedBox(height: 10.h),
+                          DecoratedBox(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20.sp),
+                            ),
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                maxHeight: context.screenHeight * .08,
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 12.sp,
+                                ),
+                                child: TextField(
+                                  controller: _passwordController,
+                                  obscureText: true,
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: translate(
+                                      'registration.password',
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 10.sp),
                           Container(
-                            height: 60,
-                            padding: const EdgeInsets.only(bottom: 10),
+                            height: context.screenHeight * .09,
+                            padding: EdgeInsets.only(bottom: 10.sp),
                             child: ElevatedButton(
                               onPressed: () {
                                 if (_validateEmail(_emailController.text) &&
@@ -203,7 +223,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   _login();
                                 } else {
                                   _showError(
-                                    'Invalid input. Please check your email and password.',
+                                    translate('registration.loginError'),
                                   );
                                 }
                               },
@@ -213,20 +233,24 @@ class _MyHomePageState extends State<MyHomePage> {
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                               ),
-                              child: const Text('Continue'),
+                              child: Text(
+                                translate('registration.continue'),
+                              ),
                             ),
                           ),
-                          const Text(
+                          Text(
                             'or',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Colors.white, // Text color
-                              fontSize: 20,
+                              fontSize: 20.sp,
                             ),
                           ),
-                          const SizedBox(height: 10),
+                          SizedBox(height: 10.h),
                           SocialLoginButton(
-                            borderRadius: 20,
+                            borderRadius: 20.sp,
+                            fontSize: 14.sp,
+                            height: context.screenHeight * .08,
                             buttonType: SocialLoginButtonType.facebook,
                             onPressed: () {
                               _showError('Not Implemented yet');
@@ -234,7 +258,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           const SizedBox(height: 10),
                           SocialLoginButton(
-                            borderRadius: 20,
+                            borderRadius: 20.sp,
+                            fontSize: 14.sp,
+                            height: context.screenHeight * .08,
                             buttonType: SocialLoginButtonType.google,
                             onPressed: () {
                               _registerWithGoogle();
@@ -242,24 +268,28 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           const SizedBox(height: 10),
                           SocialLoginButton(
+                            borderRadius: 20.sp,
+                            fontSize: 14.sp,
+                            height: context.screenHeight * .08,
                             buttonType: SocialLoginButtonType.apple,
-                            borderRadius: 20,
                             onPressed: () {
                               _showError('Not Implemented yet');
                             },
                           ),
-                          const SizedBox(height: 10),
+                          SizedBox(height: 10.h),
                           Center(
                             child: Text.rich(
                               TextSpan(
-                                text: 'Don\'t have a login yet? ',
-                                style: const TextStyle(
+                                text: translate(
+                                  'registration.dontHaveLoginYet',
+                                ),
+                                style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 16,
+                                  fontSize: 16.sp,
                                 ),
                                 children: [
                                   TextSpan(
-                                    text: 'Register',
+                                    text: translate('registration.register'),
                                     style: const TextStyle(
                                       color: Colors.green,
                                       decoration: TextDecoration.underline,
@@ -290,18 +320,17 @@ class _MyHomePageState extends State<MyHomePage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ForgotPasswordPage()),
+                                  builder: (context) => ForgotPasswordPage(),
+                                ),
                               );
                             },
-                            child: const Text(
-                              'Forgot your password ?',
+                            child: Text(
+                              translate('registration.forgotPassword'),
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: Colors
-                                    .blue, // Change the color to indicate it's a link
-                                fontSize: 16,
-                                decoration: TextDecoration
-                                    .underline, // Add underline to indicate it's a link
+                                color: Colors.blue,
+                                fontSize: 16.sp,
+                                decoration: TextDecoration.underline,
                               ),
                             ),
                           ),
