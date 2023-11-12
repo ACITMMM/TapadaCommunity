@@ -15,11 +15,29 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(20.sp),
+    return SafeArea(
+      child: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(
+              width: double.infinity,
+              child: Column(
+                children: [
+                  SizedBox(height: 12.h),
+                  Icon(
+                    Icons.account_circle,
+                    size: 62.sp,
+                    color: Colors.black,
+                  ),
+                  SizedBox(height: 6.h),
+                  Text(
+                    'Username',
+                    style: TextStyle(fontSize: 16.sp),
+                  ),
+                  SizedBox(height: 12.h),
+                ],
+              ),
+            ),
             ListTile(
               title: Text(translate('language')),
               onTap: () {
@@ -139,8 +157,9 @@ void showDemoActionSheet({
   required Widget child,
 }) {
   showCupertinoModalPopup<String>(
-      context: context,
-      builder: (BuildContext context) => child).then((String? value) {
+    context: context,
+    builder: (BuildContext context) => child,
+  ).then((String? value) {
     if (value != null) changeLocale(context, value);
   });
 }
@@ -164,7 +183,7 @@ void _onActionSheetPress(BuildContext context) {
           onPressed: () => Navigator.pop(context, 'ru'),
         ),
         CupertinoActionSheetAction(
-          child: Text(translate('Indoensia')),
+          child: Text(translate('Indonesia')),
           onPressed: () => Navigator.pop(context, 'id'),
         ),
         CupertinoActionSheetAction(
