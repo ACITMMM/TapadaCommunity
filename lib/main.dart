@@ -58,8 +58,8 @@ class _MyAppState extends State<MyApp> {
           supportedLocales: localizationDelegate.supportedLocales,
           locale: localizationDelegate.currentLocale,
           routes: {
-            'equipa': (context) => const EquipaPage(startSpalsh: true),
-            'service': (context) => const HomePage(startSpalsh: true),
+            'equipa': (context) => const EquipaPage(),
+            'service': (context) => const HomePage(),
           },
           initialRoute: () {
             if (FirebaseAuth.instance.currentUser == null) return 'equipa';
@@ -67,7 +67,7 @@ class _MyAppState extends State<MyApp> {
           }(),
           home: child,
         ),
-        child: const HomePage(startSpalsh: true),
+        child: const HomePage(),
       ),
     );
   }

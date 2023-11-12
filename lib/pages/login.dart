@@ -176,7 +176,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                                 child: TextField(
                                   controller: _emailController,
-                                  obscureText: true,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintText: translate('registration.email'),

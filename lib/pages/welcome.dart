@@ -52,9 +52,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const HomePage(
-                              startSpalsh: false,
-                            ),
+                            builder: (context) => const HomePage(),
                           ),
                         );
                       },

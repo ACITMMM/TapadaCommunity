@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tapadacommunity/extensions/build_context_extension.dart';
-import 'package:tapadacommunity/pages/splash.dart';
 import 'intro.dart';
 import 'intro_second.dart';
 
 class EquipaPage extends StatefulWidget {
-  final bool startSpalsh;
 
-  const EquipaPage({Key? key, required this.startSpalsh}) : super(key: key);
+  const EquipaPage({Key? key}) : super(key: key);
 
   @override
   State<EquipaPage> createState() => _EquipaPageState();
@@ -17,26 +15,6 @@ class EquipaPage extends StatefulWidget {
 
 class _EquipaPageState extends State<EquipaPage> {
   int currentIndex = 0;
-  late final ValueNotifier<bool> _showSplash;
-
-  @override
-  void initState() {
-    super.initState();
-    _delay();
-    _showSplash = ValueNotifier(widget.startSpalsh);
-  }
-
-  @override
-  void dispose() {
-    _showSplash.dispose();
-    super.dispose();
-  }
-
-  Future<void> _delay() async {
-    await Future.delayed(const Duration(seconds: 2), () {
-      _showSplash.value = false;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,13 +80,6 @@ class _EquipaPageState extends State<EquipaPage> {
                 ),
               ),
             ),
-          ),
-          ValueListenableBuilder<bool>(
-            valueListenable: _showSplash,
-            builder: (_, showSplash, __) {
-              if (showSplash) const SplashScreen();
-              return const SizedBox.shrink();
-            },
           ),
         ],
       ),

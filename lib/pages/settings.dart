@@ -110,9 +110,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => const EquipaPage(
-                                    startSpalsh: false,
-                                  ),
+                                  builder: (_) => const EquipaPage(),
                                 ),
                               );
                             });
