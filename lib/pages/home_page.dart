@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tapadacommunity/pages/info_page.dart';
 import 'package:tapadacommunity/pages/service_page.dart';
+import 'package:tapadacommunity/pages/settings.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -41,9 +42,9 @@ class _HomePageState extends State<HomePage> {
             },
             children: const [
               ServicePage(),
-              SizedBox(child: Center(child: Text('No design yet'))),
               InfoPage(),
               SizedBox(child: Center(child: Text('No design yet'))),
+              SettingsPage(),
             ],
           ),
         ],
@@ -94,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                         _pageController.jumpToPage(1);
                       },
                       icon: Icon(
-                        Icons.add_circle,
+                        Icons.info,
                         color: generateColor(1),
                         size: generateSize(1),
                       ),
@@ -105,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                         _pageController.jumpToPage(2);
                       },
                       icon: Icon(
-                        Icons.info,
+                        Icons.phone,
                         color: generateColor(2),
                         size: generateSize(2),
                       ),
@@ -116,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                         _pageController.jumpToPage(3);
                       },
                       icon: Icon(
-                        Icons.phone,
+                        Icons.settings,
                         color: generateColor(3),
                         size: generateSize(3),
                       ),

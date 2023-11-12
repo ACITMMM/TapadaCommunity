@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
 import 'detail_service_page.dart';
-import 'settings.dart';
 
 const itemWithGreenAccentColor = <int>[1, 2, 5, 6, 9];
 
@@ -20,23 +19,6 @@ class _ServicePageState extends State<ServicePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        leading: const Icon(Icons.menu, color: Colors.black),
-        elevation: 0.0,
-        backgroundColor: Colors.white,
-        actions: [
-          IconButton(
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => const SettingsPage()),
-            ).then((value) => setState(() {})),
-            icon: const Icon(
-              Icons.settings,
-              color: Colors.black,
-            ),
-          ),
-        ],
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

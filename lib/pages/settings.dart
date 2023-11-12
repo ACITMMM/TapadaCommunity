@@ -16,42 +16,15 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(translate('setting.setting')),
-      ),
       body: Padding(
-        padding: EdgeInsets.all(16.sp),
+        padding: EdgeInsets.all(20.sp),
         child: Column(
           children: [
             ListTile(
-              title: Text(translate('setting.deleteAccount')),
+              title: Text(translate('language')),
               onTap: () {
-                // Add your code for account deletion here
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text(translate('setting.deleteAccount')),
-                      content: Text(translate('setting.deleteAccountDesc')),
-                      actions: [
-                        TextButton(
-                          child: Text(translate('cancel')),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                        TextButton(
-                          child: Text(translate('delete')),
-                          onPressed: () {
-                            // Add logic to delete the account here
-                            Navigator.of(context).pop();
-                            // You may want to navigate to a login screen after deletion
-                          },
-                        ),
-                      ],
-                    );
-                  },
-                );
+                _onActionSheetPress(context);
+                setState(() {});
               },
             ),
             const Divider(),
@@ -73,7 +46,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           },
                         ),
                         TextButton(
-                          child: Text(translate('cancel')),
+                          child: Text(translate('reset')),
                           onPressed: () {
                             // Add logic to send password reset link
                             Navigator.of(context).pop();
@@ -124,10 +97,34 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             const Divider(),
             ListTile(
-              title: Text(translate('language')),
+              title: Text(translate('setting.deleteAccount')),
               onTap: () {
-                _onActionSheetPress(context);
-                setState(() {});
+                // Add your code for account deletion here
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text(translate('setting.deleteAccount')),
+                      content: Text(translate('setting.deleteAccountDesc')),
+                      actions: [
+                        TextButton(
+                          child: Text(translate('cancel')),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        TextButton(
+                          child: Text(translate('delete')),
+                          onPressed: () {
+                            // Add logic to delete the account here
+                            Navigator.of(context).pop();
+                            // You may want to navigate to a login screen after deletion
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
             ),
           ],
